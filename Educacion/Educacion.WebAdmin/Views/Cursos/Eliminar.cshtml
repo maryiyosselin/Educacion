@@ -43,6 +43,25 @@
             @Html.DisplayFor(model => model.Jornada)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlImagen)
+        </dt>
+
+        <dd>
+            <img src="@Model.UrlImagen" alt="@Model.Curso " style="width:200px; height:auto;" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+
+
+
+
     </dl>
 
     @using (Html.BeginForm()) {
