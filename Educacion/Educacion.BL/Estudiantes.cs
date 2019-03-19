@@ -13,8 +13,9 @@ namespace Educacion.BL
         {
             Activo = true;
         }
-   
-        public int Id  { get; set; }
+
+
+        public int Id { get; set; }
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Ingrese el Nombre")]
         public string Nombre { get; set; }
@@ -23,14 +24,13 @@ namespace Educacion.BL
         [Required(ErrorMessage = "Ingrese el Telefono")]
 
         public int Telefono { get; set; }
-       
+
         public int CursoId { get; set; }
-       
+
         public Cursos Curso { get; set; }
         [Display(Name = "Imagen")]
         public string UrlImagen { get; set; }
         public bool Activo { get; set; }
-
 
     }
 }

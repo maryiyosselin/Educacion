@@ -12,6 +12,7 @@ namespace Educacion.WebAdmin.Controllers
         CursosBL _cursosBL;
         private object _;
 
+
         public CursosController()
         {
             _cursosBL = new CursosBL();
@@ -34,13 +35,14 @@ namespace Educacion.WebAdmin.Controllers
 
         }
 
+
         [HttpPost]
         public ActionResult Crear(Cursos cursos, HttpPostedFileBase imagen)
         {
-            if (ModelState.IsValid )
-                {
+            if (ModelState.IsValid)
+            {
 
-                if (cursos.Curso != cursos.Curso. Trim ())
+                if (cursos.Curso != cursos.Curso.Trim())
                 {
                     ModelState.AddModelError("Curso", "El curso no debe de llevar espacios al inicio o al final");
                     return View(cursos);
@@ -48,7 +50,7 @@ namespace Educacion.WebAdmin.Controllers
                 }
                 if (imagen != null)
                 {
-                    cursos .UrlImagen = GuardarImagen(imagen);
+                    cursos.UrlImagen = GuardarImagen(imagen);
                 }
 
 
@@ -86,7 +88,7 @@ namespace Educacion.WebAdmin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(cursos); 
+            return View(cursos);
 
         }
 

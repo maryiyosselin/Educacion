@@ -1,0 +1,4 @@
+﻿1>------ Operación Compilar iniciada: proyecto: Educacion.WebAdmin, configuración: Debug Any CPU ------
+1>C:\Users\Antony Amaya\Desktop\tarea5\Educacion-master(5)\Educacion-master\Educacion\Educacion.WebAdmin\Controllers\CursosController.cs(13,24,13,25): warning CS0169: The field 'CursosController._' is never used
+1>  Educacion.WebAdmin -> C:\Users\Antony Amaya\Desktop\tarea5\Educacion-master(5)\Educacion-master\Educacion\Educacion.WebAdmin\bin\Educacion.WebAdmin.dll
+========== Compilar: 1 correctos, 0 incorrectos, 3 actualizados, 0 omitidos ==========

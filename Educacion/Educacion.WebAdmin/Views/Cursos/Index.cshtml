@@ -23,16 +23,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Jornada)
         </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.UrlImagen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Activo)
-        </th>
-
-
-
         <th></th>
     </tr>
 
@@ -50,17 +40,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.Jornada)
         </td>
-        <td>
-            <img src="@item.UrlImagen" alt="@item.Curso " style="max-width:64px; height:auto;" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Activo)
-        </td>
-
-
-
-
-
         <td>
             @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
             @Html.ActionLink("Detalle", "Detalle", new { id=item.Id }) |

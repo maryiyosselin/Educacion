@@ -43,7 +43,6 @@ namespace Educacion.BL
                 cursosExistente.Seccion = cursos.Seccion;
                 cursosExistente.Jornada = cursos.Jornada;
                 cursosExistente.UrlImagen = cursos.UrlImagen;
-
             }
             _contexto.SaveChanges();
 

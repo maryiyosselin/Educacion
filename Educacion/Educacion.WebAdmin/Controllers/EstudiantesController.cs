@@ -56,7 +56,7 @@ namespace Educacion.WebAdmin.Controllers
                 }
                 if (imagen != null)
                 {
-                    estudiantes .UrlImagen = GuardarImagen(imagen);
+                    estudiantes.UrlImagen = GuardarImagen(imagen);
                 }
 
 
@@ -69,7 +69,7 @@ namespace Educacion.WebAdmin.Controllers
             return View(estudiantes);
         }
 
-        public ActionResult Editar (int id)
+        public ActionResult Editar(int id)
         {
             var estudiantes = _estudiantesBL.ObtenerEstudiante(id);
             var cursos = _cursosBL.ObtenerCursos();
@@ -112,7 +112,7 @@ namespace Educacion.WebAdmin.Controllers
             return View(estudiantes);
         }
         [HttpPost]
-        public ActionResult Eliminar (Estudiantes estudiantes)
+        public ActionResult Eliminar(Estudiantes estudiantes)
         {
             _estudiantesBL.EliminarEstudiante(estudiantes.Id);
             return RedirectToAction("Index");
