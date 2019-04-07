@@ -13,18 +13,20 @@ namespace Educacion.BL
         public int CursoId { get; set; }
         public Cursos Curso { get; set; }
         public int Anio { get; set; }
-        public int NotaFinal { get; set; }
-        public bool Activo { get; set; }
+
         public int EstudianteId { get; set; }
+        public Estudiantes Estudiante { get; set; }
+
+        public bool Activo { get; set; }
+
+        public List<NotasDetalle> ListadeNotasDetalle { get; set; }
 
         public Notas()
         {
             Activo = true;
-       
-           
+            Anio = DateTime.Now.Year;
+            ListadeNotasDetalle = new List<NotasDetalle>();
         }
-
-
     }
 
     public class NotasDetalle
@@ -34,11 +36,6 @@ namespace Educacion.BL
         public int NotaId { get; set; }
         public Notas Nota { get; set; }
 
-        
-
-        public int EstudianteId { get; set; }
-        public Estudiantes Estudiante { get; set; }
-
         public int MateriaId { get; set; }
         public Materias Materia { get; set; }
 
@@ -46,8 +43,8 @@ namespace Educacion.BL
         public int SegundoParcial { get; set; }
         public int TercerParcial { get; set; }
         public int CuartoParcial { get; set; }
-
+        public int NotaTotal { get; set; }
         public int NotaFinal { get; set; }
-    }
 
+    }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Educacion.BL
 {
-  public  class NotasBL
+    public class NotasBL
     {
         Contexto _contexto;
 
@@ -22,7 +22,9 @@ namespace Educacion.BL
         public List<Notas> ObtenerNotas()
         {
             listadeNotas = _contexto.Notas
-                .Include("Estudiantes")
+                .Include("Estudiante")
+                .Include("Curso")
+               
                .ToList();
 
             return listadeNotas;
@@ -32,8 +34,9 @@ namespace Educacion.BL
         public List<NotasDetalle> ObtenerNotasDetalle(int notasId)
         {
             var listadeNotasDetalle = _contexto.NotasDetalle
-                .Include("Cursos")
-                .Where(o => o.NotaId ==notasId).ToList();
+                .Include("Materia")
+          
+                .Where(o => o.NotaId == notasId).ToList();
 
             return listadeNotasDetalle;
         }
@@ -41,7 +44,7 @@ namespace Educacion.BL
         public NotasDetalle ObtenerNotasDetallePorId(int id)
         {
             var notasDetalle = _contexto.NotasDetalle
-                .Include("Cursos").FirstOrDefault(p => p.Id == id);
+                .Include("Materia").FirstOrDefault(p => p.Id == id);
 
             return notasDetalle;
         }
@@ -49,9 +52,21 @@ namespace Educacion.BL
         public Notas ObtenerNotas(int id)
         {
             var notas = _contexto.Notas
-                .Include("Estudiante").FirstOrDefault(p => p.Id == id);
+                .Include("Estudiante")
+                .Include("Curso")
+                .FirstOrDefault(p => p.Id == id);
 
             return notas;
+        }
+
+        public List<NotasDetalle> ObtenerNotasPorMateria(int materiaId)
+        {
+            var notasDetalle = _contexto.NotasDetalle
+                .Include("Nota.Estudiante")
+                .Where(r => r.MateriaId == materiaId)
+                .ToList();
+
+            return notasDetalle;
         }
 
         public void GuardarNotas(Notas notas)
@@ -65,41 +80,42 @@ namespace Educacion.BL
             {
                 var notasExistente = _contexto.Notas.Find(notas.Id);
                 notasExistente.CursoId = notas.CursoId;
+                notasExistente.EstudianteId = notas.EstudianteId;
                 notasExistente.Anio = notas.Anio;
-                notasExistente.Anio = notas.EstudianteId ;
-                notasExistente.NotaFinal = notas.NotaFinal;
-                notasExistente.Activo =  notas.Activo;
-
-              
+                notasExistente.Activo = notas.Activo;
             }
             _contexto.SaveChanges();
-
         }
 
         public void GuardarNotasDetalle(NotasDetalle notasDetalle)
         {
-            var estudiantes = _contexto.Estudiantes.Find(notasDetalle.EstudianteId);
+            var materia = _contexto.Materias.Find(notasDetalle.MateriaId);
 
-            notasDetalle.NotaFinal = notasDetalle.PrimerParcial + notasDetalle.SegundoParcial + notasDetalle.TercerParcial/3; 
 
-                _contexto.NotasDetalle.Add(notasDetalle);
+            notasDetalle.NotaTotal = (notasDetalle.PrimerParcial + notasDetalle.SegundoParcial + notasDetalle.TercerParcial + notasDetalle.CuartoParcial);
+            notasDetalle.NotaFinal = notasDetalle.NotaTotal / 4;
+            _contexto.NotasDetalle.Add(notasDetalle);
 
             var notas = _contexto.Notas.Find(notasDetalle.NotaId);
-            notas.NotaFinal = notas.NotaFinal + notasDetalle.NotaFinal;
-
+            
             _contexto.SaveChanges();
         }
 
         public void EliminarNotasDetalle(int id)
         {
             var notasDetalle = _contexto.NotasDetalle.Find(id);
-            _contexto.NotasDetalle.Remove(notasDetalle);
+            notasDetalle.NotaFinal = notasDetalle.NotaFinal * 4;
+            notasDetalle.NotaTotal = notasDetalle.NotaTotal-notasDetalle.NotaFinal;
+          
+
 
             var notas = _contexto.Notas.Find(notasDetalle.NotaId);
-            notas.NotaFinal = notas.NotaFinal + notasDetalle.NotaFinal;
+            _contexto.NotasDetalle.Remove(notasDetalle);
+
+            
+
 
             _contexto.SaveChanges();
         }
     }
 }
-
